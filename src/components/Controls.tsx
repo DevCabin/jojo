@@ -85,8 +85,13 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
                       setError(error.message || "Failed to connect. Please try again.");
                     });
                 }}
-                style={{ backgroundColor: '#2563eb' }}
-                className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+                style={{ 
+                  backgroundColor: '#2563eb',
+                  padding: '19px',
+                  marginTop: '49px',
+                  borderRadius: '19px'
+                }}
+                className="inline-flex items-center px-8 py-4 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
               >
                 Start Voice Session
               </button>
@@ -112,7 +117,12 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
               <button
                 onClick={handleStartRecording}
                 disabled={isProcessing}
-                style={{ backgroundColor: isProcessing ? '#e2e8f0' : '#10b981' }}
+                style={{ 
+                  backgroundColor: isProcessing ? '#e2e8f0' : '#10b981',
+                  padding: '19px',
+                  marginTop: '49px',
+                  borderRadius: '19px'
+                }}
                 className={`
                   inline-flex items-center px-8 py-4 rounded-xl text-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg text-white
                   ${isProcessing 
@@ -126,7 +136,12 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
             ) : (
               <button
                 onClick={handleStopRecording}
-                style={{ backgroundColor: '#eab308' }}
+                style={{ 
+                  backgroundColor: '#eab308',
+                  padding: '19px',
+                  marginTop: '49px',
+                  borderRadius: '19px'
+                }}
                 className="inline-flex items-center px-8 py-4 text-white rounded-xl hover:brightness-110 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
               >
                 Stop Recording
@@ -135,7 +150,12 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
             
             <button
               onClick={() => disconnect()}
-              style={{ backgroundColor: '#ef4444' }}
+              style={{ 
+                backgroundColor: '#ef4444',
+                padding: '19px',
+                marginTop: '49px',
+                borderRadius: '19px'
+              }}
               className="inline-flex items-center px-8 py-4 text-white rounded-xl hover:brightness-110 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
             >
               End Voice Session
