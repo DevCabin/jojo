@@ -1,81 +1,89 @@
 # JoJo Voice Chat
 
-A modern voice-enabled AI chat application built with Next.js and Claude AI. Talk naturally with JoJo using your voice or text.
+A real-time voice chat application powered by Claude AI and Hume AI's voice analysis.
 
 ## Features
 
-- 🎙️ Voice input/output with Web Speech API
-- 💜 Light, effortless UI
-- 🤖 Powered by Claude AI for natural conversations
-- 💬 Message history and context awareness
-- 🎯 Centered, clean design focused on the conversation
+- Real-time voice chat with Claude AI
+- Voice emotion analysis using Hume AI
+- Modern, responsive UI with Tailwind CSS
+- Real-time message streaming
+- Voice recording and transcription
+- Error handling and user feedback
 
 ## Tech Stack
 
-- Next.js 14
+- Next.js 14 with App Router
 - TypeScript
 - Tailwind CSS
-- Claude AI (Anthropic)
-- Web Speech API
+- Claude AI for chat
+- Hume AI for voice analysis
+- WebSocket for real-time communication
 
 ## Environment Variables
 
-Required environment variables (either will work, but ANTHROPIC_API_KEY is preferred):
-```bash
-ANTHROPIC_API_KEY=your_api_key_here
-# or for compatibility
-CLAUDE_API_KEY=your_api_key_here
+Create a `.env.local` file with the following variables:
+
+```env
+ANTHROPIC_API_KEY=your_anthropic_api_key
+HUME_API_KEY=your_hume_api_key
 ```
 
 ## Getting Started
 
-1. Clone the repository
-2. Install dependencies: `pnpm install`
-3. Add your Claude API key to `.env.local`
-4. Run the development server: `pnpm dev`
-5. Open [http://localhost:3000](http://localhost:3000)
+1. Clone the repository:
+```bash
+git clone https://github.com/DevCabin/mojojojo.git
+cd mojojojo
+```
 
-## Learn More
+2. Install dependencies:
+```bash
+pnpm install
+```
 
-To learn more about the technologies used:
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+# Edit .env.local with your API keys
+```
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Claude AI Documentation](https://docs.anthropic.com/claude/docs)
-- [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+4. Run the development server:
+```bash
+pnpm dev
+```
 
-## Deployment
-
-This project is configured for deployment on Vercel:
-
-1. Push your code to GitHub
-2. Import your repository in Vercel
-3. Add the following environment variables in your Vercel project settings:
-   - `ANTHROPIC_API_KEY`: Your Anthropic API key for Claude
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDevCabin%2Fhume-claude-ai)
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
 ```
-├── app/              # Next.js app directory
-├── components/       # React components
-│   ├── ui/          # Reusable UI components
-│   └── voice/       # Voice interface components
-├── lib/             # Core functionality
-│   ├── claude/      # Claude API integration
-│   └── voice/       # Voice processing utilities
-└── types/           # TypeScript types
+src/
+├── app/                    # Next.js app router pages
+├── components/            # React components
+│   ├── ClientComponent.tsx    # Main client-side component
+│   ├── Controls.tsx          # Voice recording controls
+│   ├── Messages.tsx          # Message display
+│   └── VoiceProvider.tsx     # Voice context provider
+├── services/              # API services
+│   ├── ClaudeService.ts      # Claude AI integration
+│   └── HumeService.ts        # Hume AI integration
+└── types/                 # TypeScript type definitions
 ```
 
-## Development
+## Deployment
 
-This project is built with:
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Web Speech API
-- Anthropic Claude API
+The project is deployed on Vercel:
+https://mojojojo-r8g8tnt8k-devcabins-projects.vercel.app
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
