@@ -1,26 +1,30 @@
-import Anthropic from '@anthropic-ai/sdk';
-
 export class ClaudeService {
-  private anthropic: Anthropic;
-
-  constructor(apiKey: string) {
-    this.anthropic = new Anthropic({
-      apiKey: apiKey,
-    });
-  }
-
   async sendMessage(message: string): Promise<string> {
     try {
-      const response = await this.anthropic.messages.create({
-        model: "claude-3-opus-20240229",
-        max_tokens: 1024,
-        messages: [{ role: "user", content: message }],
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: 'user',
+              content: message,
+            },
+          ],
+        }),
       });
 
-      return response.content[0].text;
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      const data = await response.json();
+      return data.response;
     } catch (error) {
-      console.error('Error sending message to Claude:', error);
-      throw new Error('Failed to get response from Claude');
+      console.error('Error sending message:', error);
+      throw new Error('Failed to get response from server');
     }
   }
 }
