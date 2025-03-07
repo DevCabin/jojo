@@ -66,11 +66,11 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
 
   if (readyState !== VoiceReadyState.OPEN) {
     return (
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent pt-12">
-        <div className="max-w-4xl mx-auto px-4 pb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent pt-16">
+        <div className="max-w-4xl mx-auto px-6 pb-12">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
             {error && (
-              <div className="text-red-500 text-center mb-4 p-3 bg-red-50 rounded-lg text-sm">
+              <div className="text-red-500 text-center mb-6 p-4 bg-red-50 rounded-xl text-sm">
                 {error}
               </div>
             )}
@@ -85,7 +85,7 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
                       setError(error.message || "Failed to connect. Please try again.");
                     });
                 }}
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-500 to-blue-600 text-white rounded-xl hover:from-indigo-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
               >
                 Start Voice Session
               </button>
@@ -97,25 +97,25 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent pt-12">
-      <div className="max-w-4xl mx-auto px-4 pb-8">
-        <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent pt-16">
+      <div className="max-w-4xl mx-auto px-6 pb-12">
+        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
           {error && (
-            <div className="text-red-500 text-center mb-4 p-3 bg-red-50 rounded-lg text-sm">
+            <div className="text-red-500 text-center mb-6 p-4 bg-red-50 rounded-xl text-sm">
               {error}
             </div>
           )}
           
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-6">
             {!isRecording ? (
               <button
                 onClick={handleStartRecording}
                 disabled={isProcessing}
                 className={`
-                  inline-flex items-center px-6 py-3 rounded-xl text-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg
+                  inline-flex items-center px-8 py-4 rounded-xl text-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg
                   ${isProcessing 
                     ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700'
+                    : 'bg-gradient-to-r from-emerald-500 to-green-600 text-white hover:from-emerald-600 hover:to-green-700'
                   }
                 `}
               >
@@ -124,7 +124,7 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
             ) : (
               <button
                 onClick={handleStopRecording}
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-xl hover:from-yellow-600 hover:to-amber-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-amber-500 to-yellow-600 text-white rounded-xl hover:from-amber-600 hover:to-yellow-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
               >
                 Stop Recording
               </button>
@@ -132,7 +132,7 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
             
             <button
               onClick={() => disconnect()}
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-xl hover:from-red-600 hover:to-rose-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-rose-500 to-red-600 text-white rounded-xl hover:from-rose-600 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
             >
               End Voice Session
             </button>
