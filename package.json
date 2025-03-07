@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
     "@humeai/voice-react": "^0.1.20",
     "next": "14.1.0",
     "react": "^18.2.0",
