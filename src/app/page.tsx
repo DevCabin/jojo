@@ -2,6 +2,7 @@ import React from 'react';
 import ClientComponent from "../components/ClientComponent";
 import { VoiceProvider } from "@humeai/voice-react";
 
+// Main page component for the voice chat interface
 export default function Page() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
