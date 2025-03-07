@@ -8,26 +8,18 @@ import { createClaudeService } from '../services/claude';
 
 export default function ClientComponent() {
   const [apiKey, setApiKey] = useState<string | null>(null);
-  const [claudeApiKey, setClaudeApiKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [claudeService, setClaudeService] = useState<any>(null);
+  const [claudeService] = useState(() => createClaudeService());
 
   useEffect(() => {
     const humeKey = process.env.NEXT_PUBLIC_HUME_API_KEY;
-    const claudeKey = process.env.NEXT_PUBLIC_CLAUDE_API_KEY;
 
     if (!humeKey) {
       setError("NEXT_PUBLIC_HUME_API_KEY environment variable is not set");
       return;
     }
-    if (!claudeKey) {
-      setError("NEXT_PUBLIC_CLAUDE_API_KEY environment variable is not set");
-      return;
-    }
 
     setApiKey(humeKey);
-    setClaudeApiKey(claudeKey);
-    setClaudeService(createClaudeService(claudeKey));
   }, []);
 
   if (error) {
@@ -42,7 +34,7 @@ export default function ClientComponent() {
     );
   }
 
-  if (!apiKey || !claudeService) {
+  if (!apiKey) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center p-24">
         <div className="text-gray-500 text-center">
@@ -55,12 +47,6 @@ export default function ClientComponent() {
   return (
     <VoiceProvider 
       auth={{ type: "apiKey", value: apiKey }}
-      config={{
-        webSocket: {
-          reconnect: true,
-          maxRetries: 3,
-        }
-      }}
     >
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">

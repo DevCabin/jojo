@@ -29,6 +29,6 @@ export class ClaudeService {
   }
 }
 
-export const createClaudeService = (apiKey: string) => {
-  return new ClaudeService(apiKey);
+export const createClaudeService = () => {
+  return new ClaudeService();
 }; 
