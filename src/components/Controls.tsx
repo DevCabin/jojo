@@ -66,55 +66,78 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
 
   if (readyState !== VoiceReadyState.OPEN) {
     return (
-      <div className="fixed bottom-0 left-0 right-0 flex flex-col items-center gap-4 bg-white p-4 border-t border-gray-200">
-        <button
-          onClick={() => {
-            setError(null);
-            connect()
-              .then(() => console.log("Connected successfully"))
-              .catch((error) => {
-                console.error("Connection failed:", error);
-                setError(error.message || "Failed to connect. Please try again.");
-              });
-          }}
-          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-        >
-          Start Voice Session
-        </button>
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent pt-12">
+        <div className="max-w-4xl mx-auto px-4 pb-8">
+          <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+            {error && (
+              <div className="text-red-500 text-center mb-4 p-3 bg-red-50 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+            <div className="text-center">
+              <button
+                onClick={() => {
+                  setError(null);
+                  connect()
+                    .then(() => console.log("Connected successfully"))
+                    .catch((error) => {
+                      console.error("Connection failed:", error);
+                      setError(error.message || "Failed to connect. Please try again.");
+                    });
+                }}
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+              >
+                Start Voice Session
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 flex flex-col items-center gap-4 bg-white p-4 border-t border-gray-200">
-      {error && (
-        <div className="text-red-500 mb-2">{error}</div>
-      )}
-      
-      <div className="flex gap-4">
-        {!isRecording ? (
-          <button
-            onClick={handleStartRecording}
-            className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50 text-lg font-medium"
-            disabled={isProcessing}
-          >
-            Start Recording
-          </button>
-        ) : (
-          <button
-            onClick={handleStopRecording}
-            className="px-6 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 text-lg font-medium"
-          >
-            Stop Recording
-          </button>
-        )}
-        
-        <button
-          onClick={() => disconnect()}
-          className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 text-lg font-medium"
-        >
-          End Voice Session
-        </button>
+    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent pt-12">
+      <div className="max-w-4xl mx-auto px-4 pb-8">
+        <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+          {error && (
+            <div className="text-red-500 text-center mb-4 p-3 bg-red-50 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+          
+          <div className="flex justify-center gap-4">
+            {!isRecording ? (
+              <button
+                onClick={handleStartRecording}
+                disabled={isProcessing}
+                className={`
+                  inline-flex items-center px-6 py-3 rounded-xl text-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg
+                  ${isProcessing 
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700'
+                  }
+                `}
+              >
+                Start Recording
+              </button>
+            ) : (
+              <button
+                onClick={handleStopRecording}
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-xl hover:from-yellow-600 hover:to-amber-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+              >
+                Stop Recording
+              </button>
+            )}
+            
+            <button
+              onClick={() => disconnect()}
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-xl hover:from-red-600 hover:to-rose-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+            >
+              End Voice Session
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
