@@ -13,7 +13,6 @@ interface ControlsProps {
 export default function Controls({ claudeService, onNewMessage }: ControlsProps) {
   const { connect, disconnect, readyState, startRecording, stopRecording, transcription } = useVoice();
   const [error, setError] = useState<string | null>(null);
-  const [textInput, setTextInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -55,13 +54,7 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
       setError('Failed to get response from Claude. Please try again.');
     } finally {
       setIsProcessing(false);
-      setTextInput('');
     }
-  };
-
-  const handleTextSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await handleSendMessage(textInput);
   };
 
   // When transcription is ready, send it to Claude
@@ -70,13 +63,6 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
       handleSendMessage(transcription);
     }
   }, [transcription]);
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleTextSubmit(e);
-    }
-  };
 
   if (readyState !== VoiceReadyState.OPEN) {
     return (
@@ -105,31 +91,11 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
         <div className="text-red-500 mb-2">{error}</div>
       )}
       
-      <form onSubmit={handleTextSubmit} className="flex flex-col gap-2 w-full max-w-4xl px-4">
-        <div className="flex gap-2 w-full">
-          <textarea
-            value={textInput}
-            onChange={(e) => setTextInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type your message... (Press Enter to send, Shift+Enter for new line)"
-            className="flex-1 p-3 border rounded-lg resize-none h-[60px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            disabled={isProcessing || isRecording}
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50 h-[60px]"
-            disabled={isProcessing || isRecording || !textInput.trim()}
-          >
-            Send
-          </button>
-        </div>
-      </form>
-
-      <div className="flex gap-2">
+      <div className="flex gap-4">
         {!isRecording ? (
           <button
             onClick={handleStartRecording}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50"
+            className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50 text-lg font-medium"
             disabled={isProcessing}
           >
             Start Recording
@@ -137,7 +103,7 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
         ) : (
           <button
             onClick={handleStopRecording}
-            className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+            className="px-6 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 text-lg font-medium"
           >
             Stop Recording
           </button>
@@ -145,7 +111,7 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
         
         <button
           onClick={() => disconnect()}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 text-lg font-medium"
         >
           End Voice Session
         </button>
