@@ -27,9 +27,9 @@ export default function Messages({ messages: textMessages }: MessagesProps) {
   ];
 
   return (
-    <div className="space-y-6 mb-32 max-h-[calc(100vh-12rem)] overflow-y-auto px-4 py-6 rounded-lg bg-gray-50">
+    <div className="space-y-6 mb-32 max-h-[calc(100vh-12rem)] overflow-y-auto px-4 py-6 rounded-lg bg-white">
       {allMessages.length === 0 && (
-        <div className="text-center text-gray-500 py-8">
+        <div className="text-center text-slate-500 py-8">
           <p className="text-lg">Start speaking to begin the conversation</p>
           <p className="text-sm mt-2">Your messages will appear here</p>
         </div>
@@ -42,11 +42,11 @@ export default function Messages({ messages: textMessages }: MessagesProps) {
           <div
             className={`max-w-[80%] p-4 rounded-2xl shadow-sm ${
               msg.role === 'assistant'
-                ? 'bg-white text-gray-800 rounded-tl-none border border-gray-100'
+                ? 'bg-slate-50 text-slate-800 rounded-tl-none border border-slate-200'
                 : 'bg-blue-600 text-white rounded-tr-none'
             }`}
           >
-            <div className={`text-xs mb-1 ${msg.role === 'assistant' ? 'text-gray-500' : 'text-blue-200'}`}>
+            <div className={`text-xs mb-1 ${msg.role === 'assistant' ? 'text-slate-500' : 'text-blue-200'}`}>
               {msg.role === 'assistant' ? 'Claude' : 'You'}
             </div>
             <div className="text-[15px] leading-relaxed whitespace-pre-wrap">
