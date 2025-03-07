@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { VoiceProvider } from "@humeai/voice-react";
-import Messages from "./Messages";
+import Messages, { Message } from "./Messages";
 import Controls from "./Controls";
 import { createClaudeService } from '../services/claude';
 
 export default function ClientComponent() {
   const [apiKey, setApiKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [claudeService] = useState(() => createClaudeService());
 
   useEffect(() => {
@@ -21,6 +22,10 @@ export default function ClientComponent() {
 
     setApiKey(humeKey);
   }, []);
+
+  const handleNewMessage = (message: Message) => {
+    setMessages(prev => [...prev, message]);
+  };
 
   if (error) {
     return (
@@ -49,12 +54,12 @@ export default function ClientComponent() {
       auth={{ type: "apiKey", value: apiKey }}
     >
       <div className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
+        <div className="z-10 w-full max-w-4xl font-mono text-sm">
           <h1 className="text-4xl font-bold text-center mb-8">
             How can I help?
           </h1>
-          <Messages />
-          <Controls claudeService={claudeService} />
+          <Messages messages={messages} />
+          <Controls claudeService={claudeService} onNewMessage={handleNewMessage} />
         </div>
       </div>
     </VoiceProvider>
