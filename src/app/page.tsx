@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import ClientComponent from "../components/ClientComponent";
 import { VoiceProvider } from "@humeai/voice-react";
