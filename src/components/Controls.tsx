@@ -85,7 +85,8 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
                       setError(error.message || "Failed to connect. Please try again.");
                     });
                 }}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+                style={{ backgroundColor: '#2563eb' }}
+                className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
               >
                 Start Voice Session
               </button>
@@ -111,11 +112,12 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
               <button
                 onClick={handleStartRecording}
                 disabled={isProcessing}
+                style={{ backgroundColor: isProcessing ? '#e2e8f0' : '#10b981' }}
                 className={`
-                  inline-flex items-center px-8 py-4 rounded-xl text-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg
+                  inline-flex items-center px-8 py-4 rounded-xl text-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg text-white
                   ${isProcessing 
-                    ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-emerald-500 to-green-500 text-white hover:from-emerald-600 hover:to-green-600'
+                    ? 'cursor-not-allowed'
+                    : 'hover:brightness-110'
                   }
                 `}
               >
@@ -124,7 +126,8 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
             ) : (
               <button
                 onClick={handleStopRecording}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-xl hover:from-yellow-600 hover:to-amber-600 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+                style={{ backgroundColor: '#eab308' }}
+                className="inline-flex items-center px-8 py-4 text-white rounded-xl hover:brightness-110 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
               >
                 Stop Recording
               </button>
@@ -132,7 +135,8 @@ export default function Controls({ claudeService, onNewMessage }: ControlsProps)
             
             <button
               onClick={() => disconnect()}
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-red-500 to-rose-500 text-white rounded-xl hover:from-red-600 hover:to-rose-600 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
+              style={{ backgroundColor: '#ef4444' }}
+              className="inline-flex items-center px-8 py-4 text-white rounded-xl hover:brightness-110 transition-all duration-200 shadow-md hover:shadow-lg text-lg font-medium"
             >
               End Voice Session
             </button>
